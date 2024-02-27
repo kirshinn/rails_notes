@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.all
+    @notes = Note.includes(:tags).all
     render json: @notes
   end
 
@@ -29,7 +29,7 @@ class NotesController < ApplicationController
 
   # GET /notes/:id
   def show
-    render json: @note
+    render json: @note, serializer: NoteSerializer
   end
 
   # PUT /notes/:id
@@ -48,7 +48,7 @@ class NotesController < ApplicationController
 
   private
     def set_note
-      @note = Note.find(params[:id])
+      @note = Note.includes(:tags).find(params[:id])
     end
 
     def note_params

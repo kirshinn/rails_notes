@@ -1,5 +1,8 @@
 # Rails Notes
 
+## Install Gems
+gem 'active_model_serializers', '~> 0.10.2'
+
 ## Install and Generate
 rails new notes --api -d=sqlite3
 
@@ -19,4 +22,4 @@ VISUAL="mate --wait" bin/rails credentials:edit
 ## Docker build and Run container with arguments
 docker build --no-cache -t rails_notes:latest .
 
-docker run -p 3000:3000 -e RAILS_MASTER_KEY=$(cat config/master.key) --name=rails_notes -d rails_notes
+docker run -p 3000:3000 -v ./storage:/rails/storage -e RAILS_MASTER_KEY=$(cat config/master.key) --name=rails_notes -d rails_notes
